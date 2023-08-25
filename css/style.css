@@ -1,0 +1,419 @@
+h1 
+{
+  font-size: 80px;  
+}
+
+h2 
+{
+  font-size: 40px;  
+}
+nav ul {
+  max-width: 100%;
+  list-style: none;
+  padding: 1px;
+  border: 1px solid #ccc;
+  }
+
+.MOBI nav ul {
+  max-width: 100%;
+  list-style: none;
+  padding: 1px;
+  border: 1px solid #ccc;
+}
+
+nav ul li 
+  {   
+  text-align: center; 
+  display: inline-block;
+  position: relative;
+  font-size: 50px;
+  font-weight: bold;
+  min-width: 150px
+  }
+
+.MOBI nav ul li 
+  {   
+  display: inline-block;
+  position: relative;
+  margin-right: 50px;
+  font-size: 70px;
+  font-weight: bold
+  } 
+
+nav ul li a {
+    display: block;
+    padding: 20px;
+    color: #000000;
+    text-decoration: none;
+  }
+
+  
+.MOBI nav ul li a {
+    display: block;
+    padding: 20px;
+    color: #000000;
+    text-decoration: none;
+  }
+
+nav ul li ul {
+    font-size: 20px;
+    min-width: 150px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #000000;
+  }
+
+.MOBI nav ul li ul {
+  font-size: 30px;
+  min-width: 300px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #000000;
+  }
+  
+nav ul li:hover > ul {
+    display: block;
+  }
+  
+    
+.MOBI nav ul li:hover > ul {
+    display: block;
+  }
+
+nav ul li ul li {
+    display: block;
+    margin-right: 50px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold
+  }
+
+    
+.MOBI nav ul li ul li {
+  display: block;
+  margin-right: 40px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold
+  }
+  
+nav ul li ul li a {
+    display: block;
+    font-size: 20px;
+    padding: 10px;
+    color: #a7a6a6;
+    text-decoration: none;
+  }
+  
+.MOBI nav ul li ul li a {
+  display: block;
+  font-size: 50px;
+  padding: 10px;
+  color: #a7a6a6;
+  text-decoration: none;
+  }
+
+nav ul li ul li:hover {
+    background-color: #707070;
+  }
+
+.MOBI nav ul li ul li:hover {
+    background-color: #707070;
+  }
+
+.number-border 
+{
+text-align: center;
+border-left-color: #000000;
+border-right-color:#000000;
+border-left-width: 2px;
+border-right-width: 2px;
+}
+.number 
+{
+text-align: center;
+}
+
+
+.wide-border 
+{
+background-color: rgb(190, 190, 190);
+
+text-align: center;
+border-right-color:#000000;
+border-right-width: 2px;
+border-bottom-width: 2px;
+}
+
+table
+{
+table-layout: fixed;
+border-spacing: 0px;
+border-width: 2px;
+border-style: solid;
+border-color: black;
+}
+
+table tr th
+{
+ border-width: 1px;
+ border-style: solid;
+ border-collapse:collapse;
+ border-color: black;
+ padding: 5px;
+ background-color: rgb(190, 190, 190);
+ min-width: 60px;
+ border-bottom-width: 2px;
+}
+  
+table tr td
+{
+ border-width: 1px;
+ border-style: solid;
+ border-collapse:collapse;
+ border-color: grey;
+ padding: 5px;
+}
+
+
+  .Buttons {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    flex-direction:row;
+    align-items: center;
+    }
+
+  .Button {
+    font-weight: bold;
+     max-width: 100%;
+
+     margin-right: 30px;
+     margin-bottom: 30px;
+  }
+  .ButtonHeader {
+    font-weight: bold;
+     max-width: 100%;
+     font-size: 25px; 
+     margin-right: 10px;
+     margin-bottom: 10px;
+  }
+  .ButtonsMOBI {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    flex-direction:column;
+    align-items: center;
+    }
+  
+
+  .ButtonMOBI {
+    font-weight: bold;
+     max-width: 100%;
+     min-height: 120px;
+     margin-inline: 25px;
+     margin-bottom: 25px;
+  }
+
+.InvView fieldset {
+  max-width: 50%;
+  max-height: 50%;
+}
+ 
+.InvView legend {
+  display: inline-block;
+  font-size: 35px; 
+  font-weight: bold;
+}
+
+.InvView label{
+  width: 250px;
+  font-size: 25px; 
+  display: inline-block;
+}
+.InvView select{
+  width: 350px;
+  font-size: 25px;
+}
+
+.MOBI {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.MOBI fieldset legend {
+  display: inline-block;
+  font-size: 70px; 
+  font-weight: bold;
+}
+.MOBI fieldset label {
+  width: 800px;
+  font-size: 60px; 
+  display: inline-block;
+}
+
+.MOBI fieldset input {
+  width: 800px;
+  font-size: 60px; 
+}
+
+
+
+
+.Info fieldset {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.Info fieldset legend {
+  display: inline-block;
+  font-size: 40px; 
+  font-weight: bold;
+}
+.Info fieldset input {
+  display: inline-block;
+  font-size: 30px; 
+  font-weight: normal;
+}
+
+.Info-MOBI fieldset {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.Info-MOBI fieldset legend {
+  display: inline-block;
+  font-size: 50px; 
+  font-weight: bold;
+}
+.Info-MOBI fieldset input {
+  display: inline-block;
+  font-size: 40px; 
+  font-weight: normal;
+}
+
+.Info-MOBI table{
+  margin: 0 auto
+ }
+
+.Info-MOBI table tr th{
+  padding: 15px;
+  font-size: 55px; 
+ }
+
+ .Info-MOBI table tr td{
+  padding: 15px;
+  font-size: 55px; 
+ }
+
+fieldset {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+fieldset legend {
+  display: inline-block;
+  font-size: 90px; 
+  font-weight: bold;
+}
+
+fieldset label {
+  width: 1000px;
+  font-size: 70px; 
+  display: inline-block;
+}
+
+fieldset input {
+  width: 1000px;
+  font-size: 70px; 
+}
+
+fieldset button {
+  font-weight: bold;
+  max-width: 100%;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+select{  
+  font-size: 18px; 
+  display: inline-block;
+  width: 160px;
+}
+
+.ErrorMsg{
+  font-size: 90px;
+  color: #d61717; 
+}
+
+.DoneMsg
+{
+  font-size: 90px;
+  color: #18fc03; 
+}
+
+Table{
+  max-width: 100%;
+}
+Table td{
+ min-width:20px; 
+}
+.Combo
+{
+width: 1000px;
+font-size: 70px;
+}
+
+.button_row {
+  display: block; /* Změníme tlačítko na blokový prvek */
+  margin: 0 auto; /* Přidáme automatické zarovnání vodorovně */
+  text-align: center; /* Zarovnáme obsah tlačítka na střed */
+}
+
+.headButton
+{
+  width: 150px;
+  height: 50px;
+  font-size: 30px;
+}
+
+.smallheader
+{
+  font-size: 40px;  
+}
+
+.responsive {
+  max-width: 100%; 
+  height: auto; 
+  background-size: cover; 
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  /* Pro rozlišení 768px a větší */
+  .responsive{
+    max-width: 30%;
+    background-size: cover; /* nebo contain, podle požadavků */
+    background-position: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Pro rozlišení 1024px a větší */
+  .responsive{
+    max-width: 50%;
+
+    background-size: cover; /* nebo contain, podle požadavků */
+    background-position: center;
+  }
+}
+.Timer{
+  font-size: 30px
+}
+.Timer-MOBI{
+  font-size: 50px;  
+}
