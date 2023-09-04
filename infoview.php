@@ -65,6 +65,7 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
         unset($_SESSION['EAN_pck']);
         unset($_SESSION['Packaging']);
         unset($_SESSION['DataArray']);
+        unset($_SESSION["EAN_format"]);
         header("Location: infoarticle.php?FirstOpen=");
         }
 }

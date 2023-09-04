@@ -125,29 +125,32 @@ nav ul li ul li:hover {
     background-color: #707070;
   }
 
-.number-border 
-{
-text-align: center;
-border-left-color: #000000;
-border-right-color:#000000;
-border-left-width: 2px;
-border-right-width: 2px;
-}
-.number 
-{
-text-align: center;
-}
+  
+  .wide-border
+  {
+  background-color: rgb(190, 190, 190);
+  text-align: center;
+  border-right-color:#000000;
+  border-right-width: 2px;
+  }
 
 
-.wide-border 
-{
-background-color: rgb(190, 190, 190);
-
-text-align: center;
-border-right-color:#000000;
-border-right-width: 2px;
-border-bottom-width: 2px;
-}
+  .number-border
+  {
+  text-align: center;
+  border-right-color:#000000;
+  border-right-width: 2px;
+  }
+  .number 
+  {
+  text-align: center;
+  }
+  .wide-row td
+  {
+  border-top-width: 2px;  
+  border-top-color: #000000;
+  border-top-style: solid;
+  }
 
 table
 {
@@ -160,14 +163,12 @@ border-color: black;
 
 table tr th
 {
- border-width: 1px;
+ border-width: 0.5px;
  border-style: solid;
  border-collapse:collapse;
  border-color: black;
  padding: 5px;
  background-color: rgb(190, 190, 190);
- min-width: 60px;
- border-bottom-width: 2px;
 }
   
 table tr td
@@ -195,12 +196,19 @@ table tr td
      margin-right: 30px;
      margin-bottom: 30px;
   }
-  .ButtonHeader {
+
+  .ButtonHeader fieldset {
+    display:flex;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
+  }
+  
+   .ButtonHeader button {
     font-weight: bold;
-     max-width: 100%;
      font-size: 25px; 
-     margin-right: 10px;
-     margin-bottom: 10px;
+     margin-right: 15px;
+     margin-bottom: 0px;
   }
   .ButtonsMOBI {
     display: flex;
@@ -239,30 +247,6 @@ table tr td
   width: 350px;
   font-size: 25px;
 }
-
-.MOBI {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.MOBI fieldset legend {
-  display: inline-block;
-  font-size: 70px; 
-  font-weight: bold;
-}
-.MOBI fieldset label {
-  width: 800px;
-  font-size: 60px; 
-  display: inline-block;
-}
-
-.MOBI fieldset input {
-  width: 800px;
-  font-size: 60px; 
-}
-
-
-
 
 .Info fieldset {
   max-width: 100%;
@@ -313,6 +297,12 @@ table tr td
 fieldset {
   max-width: 100%;
   max-height: 100%;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-block-start: 5px;
+  padding-inline-start: 5px;
+  padding-inline-end: 5px;
+  padding-block-end: 5px;
 }
 
 fieldset legend {
@@ -356,12 +346,6 @@ select{
   color: #18fc03; 
 }
 
-Table{
-  max-width: 100%;
-}
-Table td{
- min-width:20px; 
-}
 .Combo
 {
 width: 1000px;
@@ -374,8 +358,13 @@ font-size: 70px;
   text-align: center; /* Zarovnáme obsah tlačítka na střed */
 }
 
-.headButton
+.headButton {
+  display: block;
+}
+
+.headButton button
 {
+  margin: 15px;
   width: 150px;
   height: 50px;
   font-size: 30px;
@@ -417,3 +406,90 @@ font-size: 70px;
 .Timer-MOBI{
   font-size: 50px;  
 }
+
+.MOBI fieldset{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+.MOBI fieldset legend {
+  display: inline-block;
+  font-size: 70px; 
+  font-weight: bold;
+}
+.MOBI fieldset label {
+  width: 800px;
+  font-size: 60px; 
+  display: inline-block;
+}
+
+.MOBI fieldset input {
+  width: 800px;
+  font-size: 60px; 
+}
+
+@media print {
+  body {
+      font-size: 12pt;
+  }
+  .headButton {
+      display: none;
+  }
+  body header{
+  display: none;    
+  }
+  .smallheader{
+    display: none;   
+  }
+
+  table
+  {
+  table-layout: fixed;
+  border-spacing: 0px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  }
+
+  table tr th
+  {
+  background-color: rgb(85, 85, 85);
+  font-size: 8pt;
+  border-width: 1px;
+  border-style: solid;
+  border-collapse:collapse;
+  }
+  
+  table tr td
+  {
+  font-size: 8pt;
+  border-width: 0.5px;
+  border-style: solid;
+  border-collapse:collapse;
+
+  }
+  .wide-border 
+  {
+  background-color: rgb(85, 85, 85);
+  text-align: center;
+  border-right-color:#000000;
+  border-right-width: 2px;
+  }
+  .number-border 
+  {
+  text-align: center;
+  border-right-color:#000000;
+  border-right-width: 2px;
+  }
+  .number
+  {
+  text-align: center;
+  }
+  .wide-row td
+  {
+  border-top-width: 2px;  
+  border-top-color: #000000;
+  border-top-style: solid;
+  }
+}     

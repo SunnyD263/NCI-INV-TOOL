@@ -84,15 +84,30 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
                 $InvNum = $stmt['rows'][0]['InvNum'];
                 $_SESSION['InvNum'] = $InvNum;
                 $UserIDinv = $stmt['rows'][0]['UserID']; 
+                $Nd_LocationInv = $stmt['rows'][0]['Nd_Location'];
                 }    
             // create new InvNum
             if($count == 0)
                 {
-                $SQL = "SELECT MAX(InvNum) as MaxNum FROM [Liquid].[dbo].[NCI_INV]";
-                $stmt = $Connection->select($SQL);
-                $InvNum = $stmt['rows'][0]['MaxNum'];
-                $InvNum = $InvNum + 1;
-                $InvRnd = 1;
+                $SQL = "SELECT [InvNum], [St_Location], [Nd_Location],[InvRnd],[InvClose],[UserID] FROM [Liquid].[dbo].[NCI_INV] WHERE ([Nd_Location]= :Nd_Location) and
+                InvRnd = (SELECT MAX(InvRnd) FROM [Liquid].[dbo].[NCI_INV] WHERE [Nd_Location]= :Nd_Location1 )";
+                $params = array('Nd_Location' => $St_location, 'Nd_Location1' => $St_location);
+                $stmt = $Connection->select($SQL,$params);
+                $count = $stmt['count'];                
+                if($count !== 0)
+                    {
+                    $InvNum = $stmt['rows'][0]['InvNum'];
+                    $InvRnd = $stmt['rows'][0]['InvRnd'] + 1;
+                    }
+                else
+                    {
+                    $SQL = "SELECT MAX(InvNum) as MaxNum FROM [Liquid].[dbo].[NCI_INV]";
+                    $stmt = $Connection->select($SQL);
+                    $InvNum = $stmt['rows'][0]['MaxNum'];
+                    $InvNum = $InvNum + 1;
+                    $InvRnd = 1;
+
+                    }
                 $_SESSION['InvNum']=$InvNum;
                 $_SESSION['InvRnd']=$InvRnd;
                 $data = array('InvNum' => $InvNum, 'Nd_Location' => $Nd_location, 'InvRnd' => $InvRnd, 'St_Location' => $St_location, 'InvClose' => false,  'UserID' => $UserID);
@@ -103,7 +118,7 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
             elseif ($count == 1 and $InvClose == false)               
                 {
                 // check InvNum opening same UserID   
-                if($St_location == $stmt['rows'][0]['St_Location'] and  $UserID == $UserIDinv)
+                if($Nd_location == $stmt['rows'][0]['Nd_Location'] and  $UserID == $UserIDinv)
                     {
                     $_SESSION['InvNum']=$InvNum;
                     $_SESSION['InvRnd']=$InvRnd;
@@ -130,7 +145,7 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
                     {
                     $_SESSION['InvNum']=$InvNum;
                     $_SESSION['InvRnd']=$InvRnd + 1;
-                    $data = array('InvNum' => $InvNum, 'Nd_Location' => $Nd_location, 'InvRnd' => $InvRnd, 'St_Location' => $St_location, 'InvClose' => false, 'UserID' => $UserID);
+                    $data = array('InvNum' => $InvNum, 'Nd_Location' => $Nd_location, 'InvRnd' => $InvRnd+1, 'St_Location' => $St_location, 'InvClose' => false, 'UserID' => $UserID);
                     $Connection->insert('NCI_INV', $data);
                     header("Location: InvPalScan.php?St_Location=");
                     }
@@ -140,6 +155,12 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
                     unset($_SESSION["St_Location"]);
                     header("Location: invpal.php?FirstOpen=");
                     }
+                }
+            else
+                {
+                $_SESSION["Error"] = "DuplicLoc_Nd";
+                unset($_SESSION["Nd_Location"]);
+                invpal();
                 }
             }
     }
@@ -158,9 +179,88 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
         {
             // check St_Location using by InvRnd and InvNum in NCI_INV table
             if (!isset($Connection)){$Connection = new PDOConnect("Liquid");} 
-            $SQL = "SELECT [InvNum], [Nd_Location],[InvRnd],[InvClose],[UserID] FROM [Liquid].[dbo].[NCI_INV] WHERE ([St_Location]= :St_Location) and
-            InvRnd = (SELECT MAX(InvRnd) FROM [Liquid].[dbo].[NCI_INV] WHERE [St_Location]= :St_Location1 )";
+
+            
+            $SQL = "SELECT [InvNum],[St_Location],[Nd_Location],[InvRnd],[InvClose],[UserID] FROM [Liquid].[dbo].[NCI_INV] WHERE ([St_Location]= :St_Location) and
+            InvRnd = (SELECT MAX(InvRnd) FROM [Liquid].[dbo].[NCI_INV] WHERE [St_Location]= :St_Location1)";
             $params = array('St_Location' => $_SESSION['St_Location'], 'St_Location1' => $_SESSION['St_Location']);
+            $stmt = $Connection->select($SQL,$params);
+            $count = $stmt['count'];
+
+            if($count !== 0)
+                {
+                $UserID = $_SESSION['UserID'];
+                $InvClose = $stmt['rows'][0]['InvClose'];
+                $InvRnd = $stmt['rows'][0]['InvRnd'];
+                $InvNum = $stmt['rows'][0]['InvNum'];
+                $_SESSION['InvNum'] = $InvNum;
+                $UserIDinv = $stmt['rows'][0]['UserID']; 
+                $St_LocationInv = $stmt['rows'][0]['St_Location'];
+                }
+            // Release to Nd_location => 'Nová Lokace'
+            if($count == 0 )
+                {
+                $_SESSION['InvRnd'] = 1;
+                $error = false;
+                }
+             // create new InvRnd, use exist InvNum             
+            elseif($count == 1 and $InvClose == true)
+                {
+                $SQL = "SELECT [InvNum], [Nd_Location],[InvRnd],[InvClose],[UserID] FROM [Liquid].[dbo].[NCI_INV] WHERE ([St_Location]<> :St_Location) and 
+                [InvRnd] = :InvRnd and [InvNum] = :InvNum";
+                $params = array('St_Location' => $_SESSION['St_Location'], 'InvRnd' => $InvRnd+1, 'InvNum' => $InvNum);
+                $stmt = $Connection->select($SQL,$params);                    
+                $count1 = $stmt['count'];
+                if($count1 == 0 )
+                    {
+                    $_SESSION['InvRnd'] = $InvRnd;
+                    $error = false;
+                    }
+                else
+                    {
+                    $_SESSION["Error"] = "OpenInv_St";
+                    unset($_SESSION["St_Location"]);
+                    header("Location: invpal.php?FirstOpen=");
+                    $error = true;
+                    }
+                }
+            // use exist InvNum
+            elseif ($count == 1 and $InvClose == false)
+            {
+
+                if($UserID == $UserIDinv and $St_LocationInv =  $_SESSION['St_Location'])
+                    {
+                    $_SESSION['InvRnd'] = $InvRnd;
+                    $error = false;
+                    }
+                elseif($UserID == $UserIDinv and $St_LocationInv <> $_SESSION['St_Location'])
+                    {
+                    $_SESSION["Error"] = "St_InvByRnd";
+                    unset($_SESSION["St_Location"]);
+                    header("Location: invpal.php?FirstOpen=");
+                    $error = true;
+                    }
+                else
+                    {
+                    $_SESSION["Error"] = "OtherUsr_St";
+                    unset($_SESSION["St_Location"]);
+                    header("Location: invpal.php?FirstOpen=");
+                    $error = true;
+                    }
+            }
+            else
+            {
+            $_SESSION["Error"] = "DuplicLoc_St";
+            unset($_SESSION["St_Location"]);
+            header("Location: invpal.php?FirstOpen=");
+            $error = true;  
+            }
+//****************************************************************** */
+if($error !== true)
+    {            
+            $SQL = "SELECT [InvNum],[St_Location],[Nd_Location],[InvRnd],[InvClose],[UserID] FROM [Liquid].[dbo].[NCI_INV] WHERE ([Nd_Location]= :St_Location) and
+            InvRnd =  :InvRnd";                  
+            $params = array('St_Location' => $_SESSION['St_Location'], 'InvRnd' => $_SESSION['InvRnd'] );
             $stmt = $Connection->select($SQL,$params);                    
             $count = $stmt['count'];
 
@@ -172,6 +272,7 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
                 $InvNum = $stmt['rows'][0]['InvNum'];
                 $_SESSION['InvNum'] = $InvNum;
                 $UserIDinv = $stmt['rows'][0]['UserID']; 
+                $Nd_LocationInv = $stmt['rows'][0]['Nd_Location'];
                 }
             // Release to Nd_location => 'Nová Lokace'
             if($count == 0 )
@@ -183,8 +284,8 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
                 {
                 $SQL = "SELECT [InvNum], [Nd_Location],[InvRnd],[InvClose],[UserID] FROM [Liquid].[dbo].[NCI_INV] WHERE ([St_Location]<> :St_Location) and 
                 [InvRnd] = :InvRnd and [InvNum] = :InvNum";
-                $params = array('St_Location' => $_SESSION['St_Location'], 'InvRnd' => $InvRnd+1, 'InvNum' => $InvNum);
-                $stmt = $Connection->select($SQL,$params);                    
+                $params = array('St_Location' => $_SESSION['St_Location'], 'InvRnd' => $InvRnd + 1, 'InvNum' => $InvNum);
+                $stmt = $Connection->select($SQL,$params);
                 $count1 = $stmt['count'];
                 if($count1 == 0 )
                     {
@@ -198,14 +299,19 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
                     header("Location: invpal.php?FirstOpen=");
                     }
                 }
-
             // use exist InvNum
             elseif ($count == 1 and $InvClose == false)
             {
 
-                if( $UserID == $UserIDinv)
+                if($UserID == $UserIDinv and $St_LocationInv =  $_SESSION['St_Location'])
                     {
                         invpal();
+                    }
+                elseif($UserID == $UserIDinv and $St_LocationInv <> $_SESSION['St_Location'])
+                    {
+                    $_SESSION["Error"] = "St_InvByRnd";
+                    unset($_SESSION["St_Location"]);
+                    header("Location: invpal.php?FirstOpen=");
                     }
                 else
                     {
@@ -214,9 +320,13 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
                     header("Location: invpal.php?FirstOpen=");
                     }
             }
-
-
-        }
+            else
+            {
+            $_SESSION["Error"] = "DuplicLoc_St";
+            unset($_SESSION["St_Location"]);
+            header("Location: invpal.php?FirstOpen=");  
+            }
+        }}
     }
 }
 function checkSkl($value) {
@@ -266,6 +376,18 @@ if (isset($_SESSION["Error"]))
     if ($_SESSION["Error"]=="OtherUsr_Nd")
     {
     echo '<span class="ErrorMsg">Inventuru cílové lokace již provádí jiný uživatel.</span>';
+    }
+    if ($_SESSION["Error"]=="DuplicLoc_St")
+    {
+    echo '<span class="ErrorMsg">Diplicitně vytvořená inventura výchozí lokace, kontaktujte IS.</span>';
+    }
+    if ($_SESSION["Error"]=="DuplicLoc_Nd")
+    {
+    echo '<span class="ErrorMsg">Diplicitně vytvořená inventura cílové lokace, kontaktujte IS.</span>';
+    }
+    if ($_SESSION["Error"]=="St_InvByRnd")
+    {
+    echo '<span class="ErrorMsg">Diplicitně vytvořená inventura cílové lokace, kontaktujte IS.</span>';
     }
     unset($_SESSION["Error"]);
 }

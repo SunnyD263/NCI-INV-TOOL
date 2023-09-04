@@ -35,9 +35,11 @@ function dataimport($DelTbl, $ImpTbl)
 {
 set_time_limit(900);
 $startTime = microtime(true);
+$txt = file_get_contents('http://localhost/proxy.txt');
+$items = explode(';', $txt);
 $parameters = [
-    'proxy_host'     => "kn.proxy.int.kn",
-    'proxy_port'     => 80,
+    'proxy_host'     => $items[0],
+    'proxy_port'     => $items[1],
      'stream_context' => stream_context_create(
         array(
             'ssl' => array(

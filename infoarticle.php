@@ -20,7 +20,6 @@
     ?>
     </header>
     <br>
-
 <?php
 session_start();
 Login("Location: infoarticle.php?FirstOpen=");
@@ -72,9 +71,8 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
             $count = $stmt['count'];
                 if ($count!==0)
                 {
-                $_SESSION['Article'] =$_GET["Article"];    
-                header("Location: infoview.php?FirstOpen=");
-                unset($_SESSION['PolishShit']);
+                $_SESSION['Article'] =$_GET["Article"];  
+                ArticleInfo(); 
                 }
                 else
                 {
@@ -85,6 +83,38 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
                 }
             }
         }    
+    }
+    elseif(isset($_GET['PolishShit']))
+    {
+    // take EAN from BoxID function checkValue()
+    if (!isset($Connection)){$Connection = new PDOConnect("Liquid");} 
+    $SQL = "SELECT [Code] FROM [Liquid].[dbo].[NCI_EAN] WHERE ([EAN_box] = :EAN)";
+    $params = array('EAN' => $_SESSION["Article"]."/".$_GET['PolishShit']);
+    $stmt = $Connection->select($SQL,$params);                    
+    $count = $stmt['count'];
+    if ($count==0)
+        {
+        $_SESSION["Error"] ="PolishShit";
+        ArticleInfo();
+        }
+    else
+        {
+        $_SESSION['Article'] = $_SESSION['Article']."/".$_GET['PolishShit'];
+        $count= EANinfo($_SESSION['Article'],$_SESSION["EAN_format"]);
+        if ($count!==0)
+            {
+            header("Location: infoview.php?FirstOpen=");
+            unset($_SESSION['PolishShit']);
+            }
+        else
+            {
+            $_SESSION["Error"] ="EAN";
+            unset($_SESSION['Article']);
+            header("Location: infoarticle.php?FirstOpen=");
+            unset($_SESSION['PolishShit']);
+            ArticleInfo();
+            }
+        }
     }
     elseif(isset($_GET['Back']))
     {
@@ -133,16 +163,23 @@ if (preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|
     echo    "<div class='MOBI'>";
     echo    "<div class='Timer-MOBI' id='timer'>00:00</div>";
     echo    "<fieldset>";
+    if (!Isset($_SESSION['PolishShit']))
+    {
     echo    "<form method='GET' id='FormField'  onchange='this.submit()'>";
     echo    "<label for='ArticleInfo' class='label-TradeIN'>Naskenuj EAN artiklu: </label><br>";
     echo    "<input type='text' id='Article' name='Article'  value='" . $_SESSION['Article'] . "' autofocus><br><br>";       
     echo    "</form>";
-    if (Isset($_SESSION['PolishShit']))
+    }
+    else
     {
+    echo    "<form method='GET' id='FormField'  onchange='this.submit()'>";
+    echo    "<label for='ArticleInfo' class='label-TradeIN'>Naskenuj EAN artiklu: </label><br>";
+    echo    "<input type='text' id='Article' name='Article'  value='" . $_SESSION['Article'] . "'><br><br>";       
+    echo    "</form>";
     echo    "<form method='GET' id='FormField'  onchange='this.submit()'>";
     echo    "<label for='PolishShit' class='label-TradeIN'>Varianta tabáku: </label><br>";       
     echo    "<input type='text' id='PolishShit' name='PolishShit'  value='' autofocus><br><br>";
-    echo    "</form>"; 
+    echo    "</form>";     
     }            
     echo    "</fieldset><br>";
     echo    "</div>";
@@ -180,7 +217,6 @@ else
     }
 }
 ?>
-// ti
 <script>
     var timerElement = document.getElementById('timer');
     var elapsedTime = <?php echo $elapsedTime?>;

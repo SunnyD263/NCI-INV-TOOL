@@ -43,7 +43,7 @@ If ($_SERVER["REQUEST_METHOD"] == "GET")
     $stmt = $Connection->execute($SQL);
 
         $dataImporter = new DataImporter();
-        $dataImporter->importData($localFilePath.$filename,$InvRnd,"NCI_Stock_".$InvRnd);
+        $dataImporter->importData($localFilePath.$filename,"NCI_Stock_".$InvRnd);
         $_SESSION['ImportDone'] = ""; 
 
     $SQL = "exec EmptyLoc_".$InvRnd;

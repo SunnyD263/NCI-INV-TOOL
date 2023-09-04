@@ -135,7 +135,7 @@ function checkValue($value,$format) {
 
         elseif (strlen($value) === 45)
         {
-        $_GET["Article"] =  strval(substr($_GET["Article"], 3, 13));
+        $_GET["Article"] =  strval(substr($_GET["BoxID"], 3, 13));
         $_SESSION["PolishShit"]="";
         return true;
         }
@@ -169,10 +169,18 @@ function checkValue($value,$format) {
 function PalCounter($InvNum,$InvRnd)
 {
     if (!isset($Connection)){$Connection = new PDOConnect("Liquid");} 
-    $SQL = "SELECT PalletID as PalCounter FROM [Liquid].[dbo].[NCI_Pallets] where  ([InvNum] = :InvNum) and ([InvRnd] = :InvRnd)";
+    $SQL = "SELECT TOP 1 [PalCounter] FROM [Liquid].[dbo].[NCI_PalCounter_View] where  ([InvNum] = :InvNum) and ([InvRnd] = :InvRnd)";
     $params = array('InvNum' => $InvNum,'InvRnd' => $InvRnd );  
-    $stmt = $Connection->select($SQL,$params);                    
-    $count = $stmt['count'];
+    $stmt = $Connection->select($SQL,$params); 
+    if ($stmt["count"] !== 0 ) 
+        {
+        $count = $stmt['rows'][0]['PalCounter'];
+        }
+    else 
+        {
+        $count = 0;
+        }
+
     return $count;
 
 }
@@ -192,7 +200,8 @@ case "EAN13":
 case "EAN16":
     $SQL = "SELECT  [Code],[Material],[Box],[EAN_box],[Crt],[EAN_crt],[Pack],[EAN_pack] FROM [Liquid].[dbo].[NCI_EAN]
     where ([EAN_box] like :EAN1)";
-    $params = array('EAN1' => '%'.$EAN);        
+    $params = array('EAN1' => '%'.$EAN);  
+
     break;
 case "Code":
     $SQL = "SELECT  [Code],[Material],[Box],[EAN_box],[Crt],[EAN_crt],[Pack],[EAN_pack] FROM [Liquid].[dbo].[NCI_EAN]
@@ -208,6 +217,7 @@ if ($count !==0 )
     $rows = $stmt['rows'];
     if($EAN = $stmt['rows'][0]['EAN_box'])
             {
+            $_SESSION["EAN_format"] = 'Code';
             $Packaging='Box';
             }
         elseif($EAN = $stmt['rows'][0]['EAN_crt'])

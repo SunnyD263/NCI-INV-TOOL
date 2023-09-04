@@ -66,7 +66,7 @@ else
     echo                "<li><a href='admin.php?WHStock=1'>Aktuální skladové zásoby - 1.kolo</a></li>";
     echo                "<li><a href='admin.php?WHStock=2'>Aktuální skladové zásoby - 2.kolo</a></li>";
     echo                "<li><a href='admin.php?WHStock=3'>Aktuální skladové zásoby - 3.kolo</a></li>";
-    echo                "<li><a href='admin.php?InfoStock='>Aktuální skladové zásoby Info</a></li>";    
+//  echo                "<li><a href='admin.php?InfoStock='>Aktuální skladové zásoby Info</a></li>";    
     echo            "</ul>";                                      
     echo        "</li>";
     echo    "</ul>";
