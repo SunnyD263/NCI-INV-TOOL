@@ -1,0 +1,415 @@
+.wide-border
+  {
+  background-color: rgb(190, 190, 190);
+  text-align: center;
+  border-right-color:#000000;
+  border-right-width: 2px;
+  }
+
+
+  .number-border
+  {
+  text-align: center;
+  border-right-color:#000000;
+  border-right-width: 2px;
+  }
+  .number 
+  {
+  text-align: center;
+  }
+
+table
+{
+table-layout: fixed;
+border-spacing: 0px;
+border-width: 2px;
+border-style: solid;
+border-color: black;
+}
+
+table tr th
+{
+ border-width: 0.5px;
+ border-style: solid;
+ border-collapse:collapse;
+ border-color: black;
+ padding: 5px;
+ background-color: rgb(190, 190, 190);
+}
+  
+table tr td
+{
+ border-width: 1px;
+ border-style: solid;
+ border-collapse:collapse;
+ border-color: grey;
+ padding: 5px;
+}
+
+
+  .Buttons {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    flex-direction:row;
+    align-items: center;
+    }
+
+  .Buttons input {
+    font-weight: bold;
+     max-width: 100%;
+     margin-right: 30px;
+     margin-bottom: 30px;
+  }
+
+  .ButtonsMOBI {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    flex-direction:column;
+    align-items: center;
+    }
+  
+
+  .ButtonsMOBI input {
+    font-weight: bold;
+     max-width: 100%;
+     min-height: 120px;
+     margin-inline: 25px;
+     margin-bottom: 25px;
+  }
+
+
+#quantityInput {
+  height: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-width: 1px;
+  border-style: solid;
+  }
+  
+  #quantityInput label {
+    margin-top: 2px;
+    margin-bottom: 3px;
+    font-size: 20px; 
+    font-weight: bold;
+    width:40%;
+    display: inline-block; /* Nastaví elementy jako inline bloky */
+    margin-left: 10px;
+    margin-right: 10px; /* Volitelně, pro větší mezeru mezi label a input */
+  }
+  #quantityInput input {
+    margin-top: 2px;
+    margin-bottom: 3px;
+    font-size: 20px;
+    max-width: 50%; 
+    font-weight: normal;
+    vertical-align: middle;
+    background-color: rgb(122, 119, 119);
+  }
+
+.Info {
+  display: block;
+  padding: 10px;
+}
+
+.Info button
+{
+  width: 125px;
+  height: 50px;
+  font-size: 30px;
+  margin-right: 20px;
+}
+
+.Info input {
+ font-size: 25px; 
+  width: 500px;
+  border: none; 
+  outline: none; 
+  background-color: rgba(0, 0, 0, 0);
+}
+
+
+
+.Info table{
+  font-size: 20px; 
+ }
+
+.Info table tr th{
+  padding: 10px;
+  font-size: 20px; 
+ }
+
+ .Info table tr td{
+  padding: 10px;
+  font-size: 20px; 
+ }
+
+ .Info table tr td button{
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0; 
+ }
+
+.Info-MOBI {
+  display: block;
+  padding: 10px;
+}
+
+.Info-MOBI button
+{
+  width: 200px;
+  height: 100px;
+  font-size: 50px;
+}
+.Info-MOBI input {
+  font-size: 35px; 
+  width: 600px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none; 
+  outline: none; 
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.Info-MOBI fieldset {
+width: 100%;
+height: 100%;
+}
+
+.Info-MOBI fieldset legend {
+  display: inline-block;
+  font-size: 50px; 
+  font-weight: bold;
+}
+.Info-MOBI fieldset input {
+  display: inline-block;
+  font-size: 40px; 
+  font-weight: normal;
+}
+
+.Info-MOBI table{
+  margin: 0 auto
+ }
+
+.Info-MOBI table tr th{
+  padding: 10px;
+  font-size: 40px; 
+ }
+
+ .Info-MOBI table tr td{
+  padding: 10px;
+  font-size: 40px; 
+ }
+
+ .Info-MOBI table tr td button{
+  height: 100%;
+  width: 100%;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Odstraníme vnitřní odsazení (padding) tlačítka */
+  margin: 0; 
+ }
+
+fieldset {
+  max-width: 100%;
+  max-height: 100%;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-block-start: 5px;
+  padding-inline-start: 5px;
+  padding-inline-end: 5px;
+  padding-block-end: 5px;
+}
+
+fieldset legend {
+  display: inline-block;
+  font-size: 90px; 
+  font-weight: bold;
+}
+
+fieldset label {
+  width: 1000px;
+  font-size: 70px; 
+  display: inline-block;
+}
+
+fieldset input {
+  width: 1000px;
+  font-size: 70px; 
+}
+
+fieldset button {
+  font-weight: bold;
+  max-width: 100%;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+select{  
+  font-size: 18px; 
+  display: inline-block;
+  width: 160px;
+}
+
+.ErrorMsg{
+  font-size: 90px;
+  color: #d61717; 
+}
+
+.responsive {
+  max-width: 100%; 
+  height: auto; 
+  background-size: cover; 
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  /* Pro rozlišení 768px a větší */
+  .responsive{
+    max-width: 30%;
+    background-size: cover; /* nebo contain, podle požadavků */
+    background-position: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Pro rozlišení 1024px a větší */
+  .responsive{
+    max-width: 50%;
+
+    background-size: cover; /* nebo contain, podle požadavků */
+    background-position: center;
+  }
+}
+
+.MOBI fieldset{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+.MOBI fieldset legend {
+  display: inline-block;
+  font-size: 70px; 
+  font-weight: bold;
+}
+.MOBI fieldset label {
+  width: 800px;
+  font-size: 60px; 
+  display: inline-block;
+}
+
+.MOBI fieldset input {
+  width: 800px;
+  font-size: 60px; 
+}
+
+@media print {
+  body {
+      font-size: 12pt;
+  }
+  body header{
+  display: none;    
+  }
+  .Info button{
+    display: none;   
+  }
+  input
+  {
+    font-size: 8pt;
+  }
+  table
+  {
+  table-layout: fixed;
+  border-spacing: 0px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  }
+
+  table tr th
+  {
+  background-color: rgb(85, 85, 85);
+  font-size: 8pt;
+  border-width: 1px;
+  border-style: solid;
+  border-collapse:collapse;
+  }
+  
+  table tr td
+  {
+  font-size: 8pt;
+  border-width: 0.5px;
+  border-style: solid;
+  border-collapse:collapse;
+  }
+
+  table tr td button
+  {
+  font-size: 15pt;
+  border-width: 0.5px;
+  border-style: solid;
+  border-collapse:collapse;
+  }
+
+  .Info input {
+    font-size: 8pt;
+  }
+  
+  .Info table {
+    table-layout: fixed;
+    border-spacing: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+  }
+  
+  .Info table tr th {
+    padding: 5px;
+    background-color: rgb(85, 85, 85);
+    font-size: 8pt;
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+  }
+  
+  .Info table tr td {
+    padding: 5px;
+    font-size: 8pt;
+    border-width: 0.5px;
+    border-style: solid;
+    border-collapse: collapse;
+  }
+  
+  .Info table tr td button {
+    margin: 0px;
+    font-size: 8pt;
+    border-width: 0.5px;
+    border-style: none;
+    border-collapse: collapse;
+
+  }
+  .wide-border 
+  {
+  background-color: rgb(85, 85, 85);
+  text-align: center;
+  border-right-color:#000000;
+  border-right-width: 2px;
+  }
+  .number-border 
+  {
+  text-align: center;
+  border-right-color:#000000;
+  border-right-width: 2px;
+  }
+  .number
+  {
+  text-align: center;
+  }
+}     

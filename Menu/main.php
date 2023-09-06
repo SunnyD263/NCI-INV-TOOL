@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="cs">
     <head>
-        <title>NCI login</title>
+        <title>NCI menu</title>
         <meta charset="UTF-8">
         <meta name="author" content="Jan Sonbol" />
         <meta name="description" content="Nučice" />
-        <link rel="stylesheet" type="text/css" href="menu/style.css" />
+        <?php session_start();?>
+        <link rel="stylesheet" type="text/css" href="style.css" />
         <link rel="icon" type="image/png" href="images/kn.png"/>
         <script
             src="https://code.jquery.com/jquery-3.6.4.js"
@@ -13,24 +14,53 @@
             crossorigin="anonymous">
         </script>
     </head>
+
     <body>
         <header>
-        <?php require 'SQLconn.php'; ?>
-        <?php require 'projectfunc.php'; 
-        session_start();
-        session_destroy();
-        ?>
-        <h1>NCI</h1>
+        <h1>Main menu</h1>
+        <?php
+        require $_SESSION['currentDir'].'\navigation.php';  
+        require $_SESSION['currentDir']."\projectfunc.php";
+        require $_SESSION['currentDir']."\SQLconn.php"; 
+
+// form import done, execution time        
+        if(isset ($_SESSION['ImportDone'])) 
+
+                {
+                echo "FTP time: ".$_SESSION["FTPtime"]."sec <br>";    
+                echo "SQL time: ".$_SESSION["SQLtime"]."sec <br>";
+                echo '<span class="DoneMsg">Aktuální skladové zásoby staženy.</span>';
+                 unset($_SESSION['ImportDone']);}; 
+                 unset($_SESSION["FTPtime"]);
+                 unset($_SESSION["SQLtime"]);
+        if(isset ($_SESSION['AllInvToHist'])) 
+                {echo '<span class="DoneMsg">Všechny aktuální skeny přesunuty do historie.</span>';
+                 unset($_SESSION['AllInvToHist']);}; ?>
         </header>    
 <?php
-session_start();
+set_time_limit(900);
+
 //  PC or mobile device variables
 $_SESSION['Platform'] = $_SERVER['HTTP_USER_AGENT'];
-If ($_SERVER["REQUEST_METHOD"] == "POST") 
-    {
 
-    // change UserID field    
-    If(isset($_POST['UserID']))
+
+// projectfunc.php -> Login($LostUsr)
+If ($_SERVER["REQUEST_METHOD"] == "GET") 
+{
+
+    If(isset($_GET['LostUsr']))
+    {
+    $_SESSION['LostUsr'] = $_GET['LostUsr'];
+    Main();
+    }
+}
+
+// projectfunc.php -> Login($LostUsr)
+If ($_SERVER["REQUEST_METHOD"] == "POST") 
+{
+    If(isset($_SESSION['LostUsr']))
+    {
+        If(isset($_POST['UserID']))
         {            
         // check UserID on SQLSrv    
         if (!isset($Connection)){$Connection = new PDOConnect("Liquid");} 
@@ -47,19 +77,14 @@ If ($_SERVER["REQUEST_METHOD"] == "POST")
         else
             {
             $_SESSION['UserID'] = $_POST['UserID'];
-            $_SESSION['currentDir'] = __DIR__;
             unset($_POST['UserID']);
-            header("Location: Menu/main.php");
+            header($_SESSION['LostUsr']);
+            unset($_SESSION['LostUsr']);
             }       
         }
     }
-else
-    {  
-    Main();    
-    }
+}
 
-
-// form function 
 function Main()
 {
     // PC or mobile device 

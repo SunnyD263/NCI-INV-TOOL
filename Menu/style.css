@@ -1,0 +1,84 @@
+h1 
+{
+  font-size: 80px;  
+}
+
+fieldset {
+  max-width: 100%;
+  max-height: 100%;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-block-start: 5px;
+  padding-inline-start: 5px;
+  padding-inline-end: 5px;
+  padding-block-end: 5px;
+}
+
+fieldset legend {
+  display: inline-block;
+  font-size: 90px; 
+  font-weight: bold;
+}
+
+fieldset label {
+  width: 1000px;
+  font-size: 70px; 
+  display: inline-block;
+}
+
+fieldset input {
+  width: 1000px;
+  font-size: 70px; 
+}
+
+fieldset button {
+  font-weight: bold;
+  max-width: 100%;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+.ErrorMsg{
+  font-size: 90px;
+  color: #d61717; 
+}
+
+.DoneMsg
+{
+  font-size: 90px;
+  color: #18fc03; 
+}
+
+.Combo
+{
+width: 1000px;
+font-size: 70px;
+}
+
+.responsive {
+  max-width: 100%; 
+  height: auto; 
+  background-size: cover; 
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  /* Pro rozlišení 768px a větší */
+  .responsive{
+    max-width: 30%;
+    background-size: cover; /* nebo contain, podle požadavků */
+    background-position: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Pro rozlišení 1024px a větší */
+  .responsive{
+    max-width: 50%;
+
+    background-size: cover; /* nebo contain, podle požadavků */
+    background-position: center;
+  }
+}
+
+

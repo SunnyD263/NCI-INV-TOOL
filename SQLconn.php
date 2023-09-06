@@ -171,48 +171,6 @@ class FTP
     }    
 }
 
-// import NCI_Stock table
-class DataImporter
-{
-    private $pdo;
-
-    public function __construct()
-    {
-        $this->pdo = PDOConnect::getInstance('Liquid');
-    }
-
-    public function importData($filePath,$Table)
-    {
-
-        $startTime = microtime(true);
-        $file = fopen($filePath, 'r');
-
-        fgets($file);
-        while (($line = fgets($file)) !== false) {
-            $data = explode("\t", $line);
-
-            $article = $data[0];
-            $description = $data[1];
-            $kpwhzo = $data[2];
-            $kpwhlo = $data[3];
-            $kpcase = $data[4];
-            $kpaval = $data[5];
-            $quantity = intval($data[6]);
-
-            $row = array(
-                'Article' => $article,
-                'KPWHZO' => $kpwhzo,
-                'KPWHLO' => $kpwhlo,
-                'KPCASE' => $kpcase,
-                'KPAVAL' => $kpaval,
-                'Quantity' => $quantity,
-            );
-
-            $this->pdo->insert($Table, $row);
-        }
-        fclose($file);
-    }
-}
 
 class ProxyParameters
 {
