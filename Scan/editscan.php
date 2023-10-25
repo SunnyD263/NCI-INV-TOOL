@@ -19,6 +19,7 @@
 
 <?php
 session_start(); 
+if (!isset($_SESSION['currentDir'])){Find_Dir();} 
 require $_SESSION['currentDir']."\projectfunc.php";
 require $_SESSION['currentDir']."\SQLconn.php"; 
 require $_SESSION['currentDir']."\scan\scanFunc.php"; 
@@ -180,6 +181,8 @@ elseif(isset($_GET['LoadForm']))
 
     // Nastavení šířky <fieldset> na základě šířky tabulky
     fieldset.style.width = tbodyWidth + 'px';
+    fieldset.style.font = "25px";
+    fieldset.style.hight="200px";
   }
 
   // Zavolání funkce při načtení stránky a při změně velikosti okna (pokud je tabulka responzivní)

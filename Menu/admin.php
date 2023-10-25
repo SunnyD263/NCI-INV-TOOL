@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="author" content="Jan Sonbol" />
         <meta name="description" content="Nučice" />
-               <link rel="stylesheet" type="text/css" href="css/style.css" />
+               <link rel="stylesheet" type="text/css" href="/nci/menu/style.css" />
         <link rel="icon" type="image/png" href="images/kn.png"/>
         <script
             src="https://code.jquery.com/jquery-3.6.4.js"
@@ -20,6 +20,7 @@
         </header>    
 <?php
 session_start(); 
+if (!isset($_SESSION['currentDir'])){Find_Dir();} 
 require $_SESSION['currentDir']."\projectfunc.php";
 require $_SESSION['currentDir']."\SQLconn.php"; 
 If ($_SERVER["REQUEST_METHOD"] == "GET") 

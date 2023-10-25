@@ -20,9 +20,10 @@
         </header>    
 <?php
 session_start(); 
+if (!isset($_SESSION['currentDir'])){Find_Dir();} 
 require $_SESSION['currentDir']."\projectfunc.php";
 require $_SESSION['currentDir']."\SQLconn.php"; 
-        require 'invviewFunc.php';         
+require 'invviewFunc.php';         
 If ($_SERVER["REQUEST_METHOD"] == "GET") 
 {
     // default view form

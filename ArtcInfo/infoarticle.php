@@ -19,7 +19,8 @@
     </header>
     <br>
 <?php
-session_start(); 
+session_start();
+if (!isset($_SESSION['currentDir'])){Find_Dir();}  
 require $_SESSION['currentDir']."\projectfunc.php";
 require $_SESSION['currentDir']."\SQLconn.php"; 
 Login("Location: infoarticle.php?FirstOpen=");

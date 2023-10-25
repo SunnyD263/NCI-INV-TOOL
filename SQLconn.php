@@ -176,10 +176,12 @@ class ProxyParameters
 {
     public static function getParameters()
     {
+        $Proxytxt = file_get_contents('http://localhost/proxy.txt');
+        $items = explode(';', $Proxytxt);
         return [
             'proxy' => [
-                'http' => 'http://kn.proxy.int.kn:80',
-                'ssl' => 'http://kn.proxy.int.kn:80'
+                'http' => "http://".$items[0].":".$item[1],
+                'ssl' => "http://".$items[0].":".$item[1]
             ],
             'ssl' => [
                 'verify_peer' => false,

@@ -47,7 +47,7 @@ If ($_SERVER["REQUEST_METHOD"] == "POST")
         else
             {
             $_SESSION['UserID'] = $_POST['UserID'];
-            $_SESSION['currentDir'] = __DIR__;
+            if (!isset($_SESSION['currentDir'])){Find_Dir();} 
             unset($_POST['UserID']);
             header("Location: Menu/main.php");
             }       

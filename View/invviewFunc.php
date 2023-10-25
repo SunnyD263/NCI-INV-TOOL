@@ -10,7 +10,7 @@ if($View !== 'ID')
         case "All":
                     $SQL=  "SELECT [St_Location],[Nd_Location],[CIEL_Quant],[Scan_Quant],[Difference],[UserID],[InvNum],[InvRnd],[InvClose] FROM [Liquid].[dbo].[".$Cmd."] 
                     WHERE  ([InvRnd] = :InvRnd) AND ([St_Location] like :LocSlct) and (len([St_Location]) < :CharCount) order by St_Location ";
-                    $params = array('InvRnd' => $_SESSION["Round"],'LocSlct' => $_SESSION['LocSlct'].'%','CharCount' => "8");
+                    $params = array('InvRnd' => $_SESSION["Round"],'LocSlct' => $_SESSION['LocSlct'].'%','CharCount' => "9");
                     $stmt = $Connection->select($SQL, $params);
             if($View == '')
                 {
@@ -26,7 +26,7 @@ if($View !== 'ID')
         case "Empty":    
             $SQL=  "SELECT [St_Location],[Nd_Location],[CIEL_Quant],[Scan_Quant],[Difference],[UserID],[InvNum],[InvRnd],[InvClose]  FROM [Liquid].[dbo].[".$Cmd."] 
                     WHERE ([InvRnd] = :InvRnd) AND ([St_Location] like :LocSlct) and (len([St_Location]) < :CharCount) and Nd_Location is null and CIEL_Quant <> 0   order by St_Location ";
-                    $params = array('InvRnd' => $_SESSION["Round"],'LocSlct' => $_SESSION['LocSlct'].'%','CharCount' => "8");
+                    $params = array('InvRnd' => $_SESSION["Round"],'LocSlct' => $_SESSION['LocSlct'].'%','CharCount' => "9");
                     $stmt = $Connection->select($SQL, $params);
             if($View == '')
                 {
@@ -41,7 +41,7 @@ if($View !== 'ID')
         case  "INV":   
             $SQL=  "SELECT [St_Location],[Nd_Location],[CIEL_Quant],[Scan_Quant],[Difference],[UserID],[InvNum],[InvRnd],[InvClose]  FROM [Liquid].[dbo].[".$Cmd."]
                     WHERE ([InvRnd] = :InvRnd) AND ([St_Location] like :LocSlct) and (len([St_Location]) < :CharCount) and Nd_Location is not null order by St_Location ";
-                    $params = array('InvRnd' => $_SESSION["Round"],'LocSlct' => $_SESSION['LocSlct'].'%','CharCount' => "8");
+                    $params = array('InvRnd' => $_SESSION["Round"],'LocSlct' => $_SESSION['LocSlct'].'%','CharCount' => "9");
                     $stmt = $Connection->select($SQL, $params);
             if($View == '')
                 {
@@ -57,7 +57,7 @@ if($View !== 'ID')
             $SQL=  "SELECT [St_Location],[Nd_Location],[CIEL_Quant],[Scan_Quant],[Difference],[UserID],[InvNum],[InvRnd],[InvClose]  FROM [Liquid].[dbo].[".$Cmd."]
                     WHERE ([InvRnd] = :InvRnd) AND ([St_Location] like :LocSlct) and (len([St_Location]) < :CharCount) and Nd_Location is not null and RowScan <> RowCiel or 
                     ([InvRnd] = :InvRnd1) AND ([St_Location] like :LocSlct1) and (len([St_Location]) < :CharCount1) and Nd_Location is not null and Difference <> 0 order by St_Location";
-                    $params = array('InvRnd' => $_SESSION["Round"],'LocSlct' => $_SESSION['LocSlct'].'%','CharCount' => "8",'InvRnd1' => $_SESSION["Round"],'LocSlct1' => $_SESSION['LocSlct'].'%','CharCount1' => "8");
+                    $params = array('InvRnd' => $_SESSION["Round"],'LocSlct' => $_SESSION['LocSlct'].'%','CharCount' => "9",'InvRnd1' => $_SESSION["Round"],'LocSlct1' => $_SESSION['LocSlct'].'%','CharCount1' => "9");
                     $stmt = $Connection->select($SQL, $params);
             if($View == '')
                 {
@@ -73,7 +73,7 @@ if($View !== 'ID')
         case  "INV_NoDiff":    
             $SQL=  "SELECT [St_Location],[Nd_Location],[CIEL_Quant],[Scan_Quant],[Difference],[UserID],[InvNum],[InvRnd],[InvClose]  FROM [Liquid].[dbo].[".$Cmd."] 
                     WHERE ([InvRnd] = :InvRnd) AND ([St_Location] like :LocSlct) and (len([St_Location]) < :CharCount) and Nd_Location is not null and RowScan = RowCiel and Difference = 0 order by St_Location ";
-                    $params = array('InvRnd' => $_SESSION["Round"],'LocSlct' => $_SESSION['LocSlct'].'%','CharCount' => "8");
+                    $params = array('InvRnd' => $_SESSION["Round"],'LocSlct' => $_SESSION['LocSlct'].'%','CharCount' => "9");
                     $stmt = $Connection->select($SQL, $params);
             if($View == '')
                 {

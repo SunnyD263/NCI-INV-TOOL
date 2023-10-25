@@ -18,7 +18,9 @@
     </header>
     <?php
 session_start(); 
+if (!isset($_SESSION['currentDir'])){Find_Dir();} 
 require $_SESSION['currentDir']."\projectfunc.php";
+require $_SESSION['currentDir']."\scan\scanfunc.php";
 require $_SESSION['currentDir']."\SQLconn.php"; 
 // Lost UserID checker
 Login("Location: invpckbin.php?FirstOpen=");

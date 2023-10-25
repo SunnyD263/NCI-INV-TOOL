@@ -220,5 +220,8 @@ function AddToArray($existingArray, $rowIndex, $record) {
     return $existingArray;
 }
 
+function Find_Dir() {
+    $_SESSION['currentDir'] = __DIR__;
+}
 
 ?>

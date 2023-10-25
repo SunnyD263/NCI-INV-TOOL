@@ -2,6 +2,123 @@ h1
 {
   font-size: 80px;  
 }
+nav ul {
+  max-width: 100%;
+  list-style: none;
+  padding: 1px;
+  border: 1px solid #ccc;
+  }
+
+.MOBI nav ul {
+  max-width: 100%;
+  list-style: none;
+  padding: 1px;
+  border: 1px solid #ccc;
+}
+
+nav ul li 
+  {   
+  text-align: center; 
+  display: inline-block;
+  position: relative;
+  font-size: 50px;
+  font-weight: bold;
+  min-width: 150px
+  }
+
+.MOBI nav ul li 
+  {   
+  display: inline-block;
+  position: relative;
+  margin-right: 50px;
+  font-size: 70px;
+  font-weight: bold
+  } 
+
+nav ul li a {
+    display: block;
+    padding: 20px;
+    color: #000000;
+    text-decoration: none;
+  }
+
+  
+.MOBI nav ul li a {
+    display: block;
+    padding: 20px;
+    color: #000000;
+    text-decoration: none;
+  }
+
+nav ul li ul {
+    font-size: 20px;
+    min-width: 150px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #000000;
+  }
+
+.MOBI nav ul li ul {
+  font-size: 30px;
+  min-width: 300px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #000000;
+  }
+  
+nav ul li:hover > ul {
+    display: block;
+  }
+  
+    
+.MOBI nav ul li:hover > ul {
+    display: block;
+  }
+
+nav ul li ul li {
+    display: block;
+    margin-right: 50px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold
+  }
+
+    
+.MOBI nav ul li ul li {
+  display: block;
+  margin-right: 40px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold
+  }
+  
+nav ul li ul li a {
+    display: block;
+    font-size: 20px;
+    padding: 10px;
+    color: #a7a6a6;
+    text-decoration: none;
+  }
+  
+.MOBI nav ul li ul li a {
+  display: block;
+  font-size: 50px;
+  padding: 10px;
+  color: #a7a6a6;
+  text-decoration: none;
+  }
+
+nav ul li ul li:hover {
+    background-color: #707070;
+  }
+
+.MOBI nav ul li ul li:hover {
+    background-color: #707070;
+  }
 
 fieldset {
   max-width: 100%;

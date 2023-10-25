@@ -6,7 +6,7 @@
         <meta name="author" content="Jan Sonbol" />
         <meta name="description" content="Nučice" />
         <?php session_start();?>
-        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="/nci/menu/style.css" />
         <link rel="icon" type="image/png" href="images/kn.png"/>
         <script
             src="https://code.jquery.com/jquery-3.6.4.js"
@@ -19,6 +19,7 @@
         <header>
         <h1>Main menu</h1>
         <?php
+        if (!isset($_SESSION['currentDir'])){Find_Dir();} 
         require $_SESSION['currentDir'].'\navigation.php';  
         require $_SESSION['currentDir']."\projectfunc.php";
         require $_SESSION['currentDir']."\SQLconn.php"; 
