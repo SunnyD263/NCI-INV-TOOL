@@ -175,10 +175,10 @@ elseif(isset($_GET['LoadForm']))
   function updateFieldsetWidth() {
     var fieldset = document.getElementById('quantityInput');
     var table = document.getElementById('data-table');
-
+    if (table !== null) {
     // Získání šířky <tbody> tabulky
     var tbodyWidth = table.getElementsByTagName('tbody')[0].offsetWidth;
-
+    }
     // Nastavení šířky <fieldset> na základě šířky tabulky
     fieldset.style.width = tbodyWidth + 'px';
     fieldset.style.font = "25px";

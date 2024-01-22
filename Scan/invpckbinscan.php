@@ -213,7 +213,7 @@ elseif(empty($_SESSION["BoxID"]))
                 $data = array( 'PalletID' => $Pallet, 'EAN' => $EAN,'Quantity' => $Quant,'St_Location' => $St_location,'Nd_Location' => $Nd_location,'Scantime' => $DateTime,'UserID' => $UserID, 'InvNum' => $InvNum, 'InvRnd' => $InvRnd);
                 $Connection->insert("NCI_Pallets_".$InvRnd, $data);
     
-                // SQL procedure fill fictitious ID for compering
+                // SQL procedure fill fictitious ID for comparing
                 $SQL = "EXECUTE FillEmpty_".$InvRnd." @St_Location = :St_Location";
                 $params = array('St_Location' =>  $St_location);
                 $stmt = $Connection->execute($SQL, $params);
